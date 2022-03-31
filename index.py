@@ -51,14 +51,14 @@ wolf = """
 
 
 # print(wolf)
-multiaccount = false
+multiaccount = False
 
 def main():
     time.sleep(1)
 
     args = sys.argv[1:]
     if len(args) == 1 and args[0] == 'multi':
-        multiaccount = true
+        multiaccount = True
 
     if (sys.platform == "darwin"):
         while True:
