@@ -118,7 +118,7 @@ def getHeroesInListWithEnergyPositions(screen):
         'hero-select2x3-energy.png', 0.94, screen)
 
     positions3 = helper.getImagePositions(
-        'hero-select3x3-energy.png', 0.92, screen)
+        'hero-select3x3-energy.png', 0.94, screen)
 
     matrix = positions2
     if(len(positions3) > 0):
@@ -132,14 +132,6 @@ def getHeroesInListWithEnergyPositions(screen):
     print('Merged Heroes positions with energy: ', len(matrix))
 
     return matrix[::-1]
-
-
-def getHeroesInListWithDepletedEnergyPositions(screen):
-    positions = helper.getImagePositions(
-        'hero-list-depleted-energy.png', 0.9, screen)
-
-    print('heroes no energy: ', len(positions))
-    return positions
 
 
 def getSelectedHeroesDepletedPositions(screen):
