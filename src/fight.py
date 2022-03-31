@@ -34,13 +34,12 @@ def handleFight():
         pos_x = int(x+uniform(-150, 150))
         pos_y = int(y+uniform(100, 200))
 
-        helper.moveDestination(pos_x, pos_y)
-        pyautogui.click()
+        helper.clickDestination(pos_x, pos_y)
 
         print('Fight click ', clicksAmount)
 
         if(clicksAmount > 15):
-            pyautogui.hotkey('ctrl', 'f5')
+            helper.refreshTab()
             break
 
         time.sleep(2+uniform(1, 5.5))

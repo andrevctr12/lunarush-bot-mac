@@ -1,6 +1,7 @@
 
 import pyautogui
 from src.helper import clickDestinationImage
+from appscript import app, k
 
 login_attempts = 0
 
@@ -12,7 +13,7 @@ def doLogin():
         print('>>> Too many login attempts, refreshing')
 
         login_attempts = 0
-        pyautogui.hotkey('ctrl', 'f5')
+        app('System Events').keystroke('r', using=k.command_down)
 
         return
 

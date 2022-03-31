@@ -11,3 +11,5 @@ PyScreeze==0.1.28
 pytweening==1.0.4
 PyYAML==6.0
 pyclick==0.0.2
+appscript=1.2.0
+pynput=1.7.6

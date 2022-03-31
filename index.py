@@ -1,16 +1,16 @@
 # -*- coding: utf-8 -*-
 from cv2 import cv2
-
-from os import listdir
+from mss import ScreenShotError
+from os import listdir, system
 from random import randint, uniform
 from random import random
 
 import numpy as np
 import pyautogui
-
-import time
 import sys
+import time
 from src import login, helper, bosshunt, heroselect, fight, date
+from appscript import app, k
 
 try:
     import pygetwindow
@@ -35,7 +35,7 @@ wolf = """
                                              <__________\______)\__)
 =========================================================================
 ======================== LUS BUSD BNB USDT USDC =========================
-============== 0x1F66230C4e98b557D3e55d7d2C047CcbA8E55bD6 ===============
+============== 0xa24d8b3637e112489B0C956eEe2Cd8bEc826d6FF ===============
 =========================================================================
 ============== https://github.com/walterdis/lunarush-bot ================
 =========================================================================
@@ -56,6 +56,21 @@ time.sleep(4)
 def main():
     time.sleep(1)
 
+    args = sys.argv[1:]
+    if len(args) == 1 and args[0] == 'open_site':
+        helper.openNewLunaTab()
+
+    if (sys.platform == "darwin"):
+        while True:
+            try:
+                playmacOS()
+                
+            except ScreenShotError:
+                print('ScreenShot Error! Trying again...')
+                helper.moveDestination(0,0)
+            except RuntimeError:
+                print('Runtime Error! Trying again...')
+    
     if(sys.platform == "linux" or sys.platform == "linux2"):
         while True:
             play()
@@ -90,10 +105,30 @@ def main():
         print('Finished all plays... waiting ', round(waitTime), ' seconds to begin again.')
         time.sleep(waitTime)
 
+def playmacOS():
+    chrome = "open -a /Applications/Google\ Chrome.app https://app.lunarush.io"
+    firefox = "open -a Firefox https://app.lunarush.io"
+
+    for current in ['Google Chrome', 'Firefox']:
+        try:
+            app(current).activate()
+            if current == 'Google Chrome':
+                system(chrome)
+            else:
+                system(firefox)
+        except:
+            app(current).activate()
+ 
+        play()
+        helper.closeLunaTab()
+ 
+        time.sleep(2)
+ 
+    print('Finished all plays... waiting to begin again.')
+    time.sleep(4500+uniform(20, 300))
+
 
 def play():
-    time.sleep(1)
-
     while True:
         helper.handlePopup()
 
@@ -103,29 +138,29 @@ def play():
         if(isLoginScreen(screen)):
             print('Login screen found!!!')
             login.doLogin()
-
-        screen = helper.printSreen()
+            screen = helper.printSreen()
+            
         if(isModeSelectScreen(screen)):
             print('Mode select found!!!')
             helper.clickDestinationImage(
                 'boss-fight-mode-icon.png', 'boss-fight-mode')
             time.sleep(2)
+            screen = helper.printSreen()
 
-        screen = helper.printSreen()
         if(isBossHuntStageSelect(screen)):
             print('Boss stage select screen found!!!')
             bosshunt.execute()
             time.sleep(2)
+            screen = helper.printSreen()
 
-        screen = helper.printSreen()
         if(isHeroSelectScreen(screen)):
             print('Hero select screen found!!!')
             hasHero = heroselect.execute(screen)
 
             if(not hasHero):
                 break
+            screen = helper.printSreen()
 
-        screen = helper.printSreen()
         fight.execute(screen)
 
         print('waiting ...')
@@ -164,4 +199,8 @@ def isHeroSelectScreen(screen):
     return len(positions) > 0
 
 
-main()
+try:
+    if __name__ == '__main__':
+        main()
+except KeyboardInterrupt:
+    print('Program exited with Ctrl+C')

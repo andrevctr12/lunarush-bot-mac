@@ -24,7 +24,7 @@ def removeDepletedHeroes(screen):
 
         #pyautogui.moveTo(x+100, y, 1 + random()/2)
         # pyautogui.click()
-        pos_x = int(x+uniform(100, 110))
+        pos_x = int(x+uniform(150, 200))
         pos_y = int(y+uniform(10, 30))
 
         helper.clickDestination(pos_x, pos_y, 2)
@@ -36,11 +36,16 @@ def selectHeroes(screen=None):
         screen = helper.printSreen()
 
     emptySlotPositions = getEmptySlotPositions(screen)
-    emptySlotsAmount = len(emptySlotPositions)
-    scrollAmount = 6
+    emptySlotsAmount = len(emptySlotPositions) - 1
+    scrollAmount = 3
 
     if(emptySlotsAmount < 1):
         return True
+
+    moveToScrollPosition(screen)
+    scrollHeroesListToBottom()
+
+    screen = helper.printSreen()
 
     hasOneHeroToFight = False
     while(emptySlotsAmount > 0):
@@ -70,6 +75,9 @@ def selectHeroes(screen=None):
         sleep(1)
 
         scrollAmount = scrollAmount - 1
+        if (scrollAmount == 0):
+            emptySlotsAmount = emptySlotsAmount + 1
+
         screen = helper.printSreen()
 
     if(hasOneHeroToFight is False and emptySlotsAmount > 2):
@@ -123,7 +131,7 @@ def getHeroesInListWithEnergyPositions(screen):
 
     print('Merged Heroes positions with energy: ', len(matrix))
 
-    return matrix
+    return matrix[::-1]
 
 
 def getHeroesInListWithDepletedEnergyPositions(screen):
@@ -143,6 +151,18 @@ def getSelectedHeroesDepletedPositions(screen):
 
 
 def scrollHeroesList(screen):
+    moveToScrollPosition(screen)
+
+    helper.scrollDrag(0, 170)
+
+    return
+
+def scrollHeroesListToBottom():
+    helper.scroll(-85)
+
+    return
+
+def moveToScrollPosition(screen):
     startScrollPosition = helper.getImagePositions(
         'hero-select-warrior-text.png', 0.9, screen)
 
@@ -156,8 +176,3 @@ def scrollHeroesList(screen):
     pos_y = int(y+uniform(200, 300))
 
     helper.moveDestination(pos_x, pos_y, 1)
-    #pyautogui.moveTo(x+50, y+100, 1)
-
-    pyautogui.dragRel(0, -150, duration=1, button='left')
-
-    return

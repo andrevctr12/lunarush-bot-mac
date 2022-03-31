@@ -1,10 +1,12 @@
-from random import random, uniform
+from random import random, uniform, randrange
 import sys
 import cv2
 import mss
 import time
 import numpy as np
 import pyautogui
+from appscript import app, k
+from pynput.mouse import Controller
 
 try:
     from pyclick import HumanClicker
@@ -13,7 +15,7 @@ except ImportError or ModuleNotFoundError:
     time.sleep(5)
     sys.exit(1)
 
-#clicker = HumanClicker()
+mouse = Controller()
 
 hc = HumanClicker()
 pyautogui.MINIMUM_DURATION = 0.1
@@ -22,7 +24,10 @@ pyautogui.PAUSE = 1
 
 
 def moveDestination(x, y, time=2):
-    hc.move((int(x), int(y)), time)
+    if (sys.platform == "darwin"):
+        hc.move((int(x/2), int(y/2)), time)
+    else:
+        hc.move((int(x), int(y)), time)
 
 
 def clickDestination(x, y, duration=2):
@@ -56,6 +61,23 @@ def clickDestinationImage(img, name=None, timeout=2, threshold=0.7):
         # pyautogui.click()
 
         return True
+
+def scroll(y, step = 1):
+    # if (y < 0):
+    #     y = -y
+    #     step = -step
+    # for s in range(y):
+    #     sl = randrange(3,6,1)
+    #     mouse.scroll(0, step)
+    #     time.sleep(sl * 0.01)
+    pyautogui.scroll(y)
+
+def scrollDrag(x, y, duration=1):
+    pyautogui.dragRel(0, y, duration, button='left')
+
+def closeLunaTab():
+    app('System Events').keystroke('w', using=k.command_down)
+    print("Close Luna Tab")
 
 
 def hasImage(name, threshold=0.7, img=None):
@@ -111,3 +133,8 @@ def handlePopup(screen=None):
     if(hasImage('button-x.png', 0.8, screen)):
         clickDestinationImage('button-x.png', None, 2, 0.8)
 
+def refreshTab():
+    if (sys.platform == "darwin"):
+        app('System Events').keystroke('r', using=k.command_down)
+    else:
+        pyautogui.hotkey('ctrl', 'f5')
