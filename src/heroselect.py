@@ -136,7 +136,7 @@ def getHeroesInListWithEnergyPositions(screen):
 
 def getSelectedHeroesDepletedPositions(screen):
     positions = helper.getImagePositions(
-        'hero-selected-0x3-depleted-energy.png', 0.89, screen)
+        'hero-selected-0x3-depleted-energy.png', 0.8, screen)
 
     print('selected heroes no energy: ', len(positions))
     return positions
@@ -145,8 +145,8 @@ def getSelectedHeroesDepletedPositions(screen):
 def scrollHeroesList(screen):
     moveToScrollPosition(screen)
 
-    helper.scrollDrag(0, 170)
-
+    # helper.scrollDrag(0, 170)
+    helper.scroll(25)
     return
 
 def scrollHeroesListToBottom():

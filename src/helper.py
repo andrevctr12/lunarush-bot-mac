@@ -6,6 +6,7 @@ import time
 import numpy as np
 import pyautogui
 from appscript import app, k
+from pynput.mouse import Controller
 
 try:
     from pyclick import HumanClicker
@@ -18,6 +19,7 @@ hc = HumanClicker()
 pyautogui.MINIMUM_DURATION = 0.1
 pyautogui.MINIMUM_SLEEP = 0.1
 pyautogui.PAUSE = 1
+mouse = Controller()
 
 
 def moveDestination(x, y, time=2):
@@ -60,14 +62,13 @@ def clickDestinationImage(img, name=None, timeout=2, threshold=0.7):
         return True
 
 def scroll(y, step = 1):
-    # if (y < 0):
-    #     y = -y
-    #     step = -step
-    # for s in range(y):
-    #     sl = randrange(3,6,1)
-    #     mouse.scroll(0, step)
-    #     time.sleep(sl * 0.01)
-    pyautogui.scroll(y)
+    if (y < 0):
+        y = -y
+        step = -step
+    for s in range(y):
+        sl = randrange(3,6,1)
+        mouse.scroll(0, step)
+        time.sleep(sl * 0.01)
 
 def scrollDrag(x, y, duration=1):
     pyautogui.dragRel(0, y, duration, button='left')

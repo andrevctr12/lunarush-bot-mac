@@ -50,15 +50,15 @@ wolf = """
 """
 
 
-print(wolf)
-time.sleep(4)
+# print(wolf)
+multiaccount = false
 
 def main():
     time.sleep(1)
 
     args = sys.argv[1:]
-    if len(args) == 1 and args[0] == 'open_site':
-        helper.openNewLunaTab()
+    if len(args) == 1 and args[0] == 'multi':
+        multiaccount = true
 
     if (sys.platform == "darwin"):
         while True:
@@ -76,7 +76,7 @@ def main():
             play()
 
             # 3600 seconds = 1 hour
-            waitTime = 7200 + uniform(20, 300)
+            waitTime = 9600 + uniform(20, 300)
             print('Waiting ', round(waitTime), ' seconds...')
             time.sleep(waitTime)
 
@@ -106,26 +106,31 @@ def main():
         time.sleep(waitTime)
 
 def playmacOS():
-    chrome = "open -a /Applications/Google\ Chrome.app https://app.lunarush.io"
-    firefox = "open -a Firefox https://app.lunarush.io"
+    if (multiaccount):
+        chrome = "open -a /Applications/Google\ Chrome.app https://app.lunarush.io"
+        brave = "open -a /Applications/Brave\ Browser.app https://app.lunarush.io"
 
-    for current in ['Google Chrome', 'Firefox']:
-        try:
-            app(current).activate()
-            if current == 'Google Chrome':
-                system(chrome)
-            else:
-                system(firefox)
-        except:
-            app(current).activate()
- 
+        for current in ['Google Chrome', 'Brave Browser']:
+            try:
+                app(current).activate()
+                if current == 'Google Chrome':
+                    system(chrome)
+                else:
+                    system(brave)
+            except:
+                app(current).activate()
+    
+            play()
+            helper.closeLunaTab()
+    
+            time.sleep(2)
+    
+        print('Finished all plays... waiting to begin again.')
+        time.sleep(9500+uniform(20, 300))
+    
+    else:
         play()
-        helper.closeLunaTab()
- 
-        time.sleep(2)
- 
-    print('Finished all plays... waiting to begin again.')
-    time.sleep(4500+uniform(20, 300))
+        time.sleep(10000+uniform(300, 600))
 
 
 def play():
