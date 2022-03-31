@@ -6,7 +6,6 @@ import time
 import numpy as np
 import pyautogui
 from appscript import app, k
-from pynput.mouse import Controller
 
 try:
     from pyclick import HumanClicker
@@ -14,8 +13,6 @@ except ImportError or ModuleNotFoundError:
     print('pyclick not found! Run pip install -r requirements.txt again.')
     time.sleep(5)
     sys.exit(1)
-
-mouse = Controller()
 
 hc = HumanClicker()
 pyautogui.MINIMUM_DURATION = 0.1
