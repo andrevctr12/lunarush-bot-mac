@@ -7,15 +7,17 @@
 A última atualização trouxe mudanças no sistema de energia. O bot foi atualizado para funcionar a partir do momento que os personagens tem 2 ou mais energia.
 Não foi testado acima de 3 (para quem tem VIP) e abaixo de 2 energias, o bot fazia detecções errôneas.
 
-# Multi Contas Implementado! (apenas para windows)
-Ele detecta janelas com a palavra "Luna Rush", ou seja, caso o usuário possua algo além do jogo aberto que tenha esse nome, o bot vai interpretar que é uma janela do jogo.
+# 2 Accounts Implemented! (only for mac)
+You need to use one game on Chrome and another on Firefox, it closes the windows to save processing, you can use the PC while the bot is not working
+
+# Multi-Account for Windows
 
 # Luna Rush Auto Clicker Bot
 
 Se o aplicativo lhe ajudar de alguma forma, uma doação para ajudar a pagar a conta de luz sempre é bem vinda ;)
 
 ### **Wallet Smart Chain (BNB, LUS, USDT, BUSD)**
-0x1F66230C4e98b557D3e55d7d2C047CcbA8E55bD6 
+0xa24d8b3637e112489B0C956eEe2Cd8bEc826d6FF 
 #
 
 Bot desenvolvido com o intuito de me permitir dormir durante a noite e, poder dar uma volta por ai sem ficar me preocupando com horário ;)
@@ -24,7 +26,7 @@ Alguns métodos foram retirados do bot do bombcrypto feito pelo mpcabete (https:
 
 # Requerimentos
 ### **Tanto o jogo quanto a metamask devem estar em inglês para funcionar corretamente.**
-- Qualidade do jogo deve estar na **mínima** (configuravel no próprio jogo)
+- Qualidade do jogo deve estar na **media** (configuravel no próprio jogo)
 - Python 3.9
    - https://www.python.org/downloads/release/python-399/ ou https://www.python.org/ftp/python/3.9.9/python-3.9.9-amd64.exe
  - Na instalação, deixe marcado a caixa **"add python  to path"**
@@ -32,7 +34,7 @@ Alguns métodos foram retirados do bot do bombcrypto feito pelo mpcabete (https:
  - Digite ```python index.py``` e execute o programa
   
 
-*BOT desenvolvido em resolução 1920x1080 (full hd). Caso de problema de detecção de imagens, tente tirar fotos novamente igual as que estão na pasta **target_images***
+*BOT desenvolvido em resolução 2560 × 1600 (@2x). Deve funcionar com qualquer macOS com configuração padrão de redimensionamento. Caso de problema de detecção de imagens, tente tirar fotos novamente igual as que estão na pasta **target_images***
 
 # O que ele faz?
 - Conecta na metamask.
